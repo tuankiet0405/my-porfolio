@@ -1,0 +1,133 @@
+// ===========================================
+// MIXINS - Portfolio Book
+// ===========================================
+
+// Flexbox
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Typography
+@mixin heading($size: $font-size-2xl) {
+  font-family: $font-display;
+  font-size: $size;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+@mixin body-text($size: $font-size-base) {
+  font-family: $font-body;
+  font-size: $size;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #444;
+}
+
+// Paper texture effect
+@mixin paper-texture {
+  background-color: var(--color-paper);
+  background-image: 
+    linear-gradient(90deg, transparent 79px, rgba(0,0,0,0.03) 79px, rgba(0,0,0,0.03) 81px, transparent 81px),
+    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 100% 24px;
+}
+
+// 3D Transform
+@mixin preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+@mixin backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+// Page styling
+@mixin page-base {
+  position: absolute;
+  width: $page-width;
+  height: $book-height;
+  @include paper-texture;
+  @include preserve-3d;
+  transform-origin: left center;
+  transition: transform $transition-page-flip;
+}
+
+// Responsive
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+// Hover effect
+@mixin hover-lift($distance: -3px) {
+  transition: transform $transition-normal, box-shadow $transition-normal;
+  
+  &:hover {
+    transform: translateY($distance);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Button styles
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-lg;
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all $transition-normal;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Gradient text
+@mixin gradient-text($start: var(--color-primary), $end: var(--color-accent)) {
+  background: linear-gradient(135deg, $start, $end);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Animation keyframes helper
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}

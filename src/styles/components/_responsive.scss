@@ -1,0 +1,360 @@
+// ===========================================
+// RESPONSIVE STYLES - Portfolio Book
+// ===========================================
+
+// Tablet styles
+@media (max-width: $breakpoint-tablet) {
+  .book-container {
+    padding: $spacing-md;
+  }
+
+  .book {
+    width: 90vw;
+    max-width: 600px;
+    height: auto;
+    aspect-ratio: 4/3;
+  }
+
+  .page {
+    width: 50%;
+  }
+
+  .bookmarks {
+    right: -35px;
+    
+    .bookmark-tab {
+      width: 35px;
+      height: 50px;
+      
+      .bookmark-label {
+        font-size: 10px;
+      }
+      
+      .bookmark-tooltip {
+        display: none;
+      }
+    }
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: $font-size-lg;
+    
+    &.prev {
+      left: -50px;
+    }
+    
+    &.next {
+      right: -50px;
+    }
+  }
+
+  .page-content {
+    padding: $spacing-lg;
+  }
+
+  .page-header {
+    margin-bottom: $spacing-lg;
+    
+    .chapter-title {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  .cover-page .page-front {
+    .cover-title {
+      font-size: $font-size-4xl;
+    }
+    
+    .cover-subtitle {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+  }
+
+  .projects-grid {
+    gap: $spacing-md;
+  }
+
+  .project-card {
+    padding: $spacing-md;
+  }
+}
+
+// Mobile styles
+@media (max-width: $breakpoint-mobile) {
+  .book-container {
+    padding: $spacing-sm;
+    perspective: none;
+  }
+
+  .book {
+    width: 95vw;
+    height: auto;
+    min-height: 80vh;
+  }
+
+  // Disable 3D flip on mobile, use slide instead
+  .book-wrapper {
+    transform-style: flat;
+  }
+
+  .pages-container {
+    transform-style: flat;
+  }
+
+  .page {
+    width: 100%;
+    left: 0;
+    transform-origin: center center;
+    transform: none !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $transition-normal, visibility $transition-normal;
+    
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+    }
+    
+    // Hide back face on mobile
+    .page-back {
+      display: none;
+    }
+    
+    .page-front {
+      border-radius: 8px;
+    }
+  }
+
+  // Show only front side
+  .page.flipped {
+    transform: none;
+  }
+
+  .bookmarks {
+    position: fixed;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    transform: none;
+    flex-direction: row;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    padding: $spacing-xs;
+    gap: 2px;
+    justify-content: center;
+    z-index: 1000;
+    
+    .bookmark-tab {
+      width: auto;
+      height: 40px;
+      padding: 0 $spacing-sm;
+      border-radius: 4px;
+      flex: 1;
+      max-width: 60px;
+      
+      .bookmark-label {
+        transform: none;
+        position: static;
+        font-size: 10px;
+      }
+      
+      &:hover {
+        transform: none;
+      }
+      
+      &.active {
+        transform: none;
+        
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .nav-arrow {
+    width: 35px;
+    height: 35px;
+    
+    &.prev {
+      left: 5px;
+    }
+    
+    &.next {
+      right: 5px;
+    }
+  }
+
+  .page-counter {
+    bottom: 60px;
+    font-size: $font-size-xs;
+  }
+
+  .page-content {
+    padding: $spacing-md;
+    padding-bottom: $spacing-2xl;
+  }
+
+  .page-header {
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    
+    .chapter-number {
+      font-size: $font-size-xs;
+      letter-spacing: 2px;
+    }
+    
+    .chapter-title {
+      font-size: $font-size-xl;
+    }
+  }
+
+  .cover-page .page-front {
+    padding: $spacing-lg;
+    
+    .cover-title {
+      font-size: $font-size-3xl;
+    }
+    
+    .cover-subtitle {
+      font-size: $font-size-base;
+    }
+    
+    .cover-author {
+      font-size: $font-size-base;
+    }
+  }
+
+  .section-title {
+    font-size: $font-size-lg;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-item {
+    padding: $spacing-sm;
+  }
+
+  .project-card {
+    padding: $spacing-md;
+    
+    .project-title {
+      font-size: $font-size-base;
+    }
+    
+    .project-description {
+      font-size: $font-size-sm;
+    }
+    
+    .project-tags {
+      .tag {
+        font-size: 10px;
+        padding: 2px $spacing-xs;
+      }
+    }
+  }
+
+  .timeline {
+    padding-left: $spacing-lg;
+    
+    &::before {
+      left: 4px;
+    }
+    
+    .timeline-item {
+      &::before {
+        left: calc(-#{$spacing-lg} + 1px);
+        width: 8px;
+        height: 8px;
+      }
+      
+      .timeline-date {
+        font-size: $font-size-xs;
+      }
+      
+      .timeline-title {
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  .contact-form {
+    .form-group {
+      margin-bottom: $spacing-md;
+      
+      input,
+      textarea {
+        padding: $spacing-sm;
+        font-size: $font-size-base;
+      }
+    }
+    
+    .submit-btn {
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-base;
+    }
+  }
+
+  .social-links {
+    justify-content: center;
+    margin-top: $spacing-lg;
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  // Hide flip hint on mobile
+  .flip-hint {
+    display: none;
+  }
+}
+
+// Very small screens
+@media (max-width: 360px) {
+  .book {
+    min-height: 70vh;
+  }
+
+  .page-content {
+    padding: $spacing-sm;
+  }
+
+  .bookmarks .bookmark-tab {
+    max-width: 50px;
+    padding: 0 $spacing-xs;
+  }
+}
+
+// Landscape mobile
+@media (max-width: $breakpoint-tablet) and (orientation: landscape) {
+  .book-container {
+    min-height: auto;
+    padding: $spacing-sm;
+  }
+
+  .book {
+    height: 80vh;
+    aspect-ratio: auto;
+  }
+
+  .bookmarks {
+    bottom: auto;
+    top: 0;
+  }
+
+  .page-counter {
+    bottom: $spacing-sm;
+  }
+}

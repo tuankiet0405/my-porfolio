@@ -1,0 +1,344 @@
+// ===========================================
+// MAIN SCSS - Portfolio Book
+// ===========================================
+
+// Base imports (variables and mixins are auto-imported via vite config)
+@import 'animations';
+
+// Component styles
+@import 'components/book';
+@import 'components/page';
+@import 'components/bookmarks';
+@import 'components/chapters';
+@import 'components/responsive';
+
+// ===========================================
+// RESET & BASE STYLES
+// ===========================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-primary);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// ===========================================
+// APP CONTAINER
+// ===========================================
+
+.app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+// ===========================================
+// TYPOGRAPHY
+// ===========================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+h1 { font-size: $font-size-5xl; }
+h2 { font-size: $font-size-4xl; }
+h3 { font-size: $font-size-3xl; }
+h4 { font-size: $font-size-2xl; }
+h5 { font-size: $font-size-xl; }
+h6 { font-size: $font-size-lg; }
+
+p {
+  margin-bottom: $spacing-md;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+// ===========================================
+// UTILITY CLASSES
+// ===========================================
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-md { margin-bottom: $spacing-md; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+.mt-sm { margin-top: $spacing-sm; }
+.mt-md { margin-top: $spacing-md; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+// ===========================================
+// CHAPTER CONTENT STYLES
+// ===========================================
+
+.chapter-content {
+  .section {
+    margin-bottom: $spacing-xl;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .section-title {
+    @include heading($font-size-xl);
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Skills grid
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+}
+
+.skill-item {
+  padding: $spacing-md;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+  }
+  
+  .skill-name {
+    font-weight: 600;
+    margin-bottom: $spacing-xs;
+  }
+  
+  .skill-bar {
+    height: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 80%, black));
+      border-radius: 3px;
+      transition: width 1s ease;
+    }
+  }
+}
+
+// Projects grid
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+}
+
+.project-card {
+  padding: $spacing-lg;
+  background: $color-white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all $transition-normal;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .project-title {
+    @include heading($font-size-lg);
+    margin-bottom: $spacing-sm;
+  }
+  
+  .project-description {
+    @include body-text($font-size-sm);
+    color: #666;
+    margin-bottom: $spacing-md;
+  }
+  
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    
+    .tag {
+      padding: $spacing-xs $spacing-sm;
+      background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+      color: var(--color-primary);
+      font-size: $font-size-xs;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+  }
+}
+
+// Timeline (Experience)
+.timeline {
+  position: relative;
+  padding-left: $spacing-xl;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--color-accent), transparent);
+  }
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: $spacing-xl;
+  
+  &:last-child {
+    padding-bottom: 0;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(-#{$spacing-xl} - 5px);
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    border: 3px solid var(--color-paper);
+  }
+  
+  .timeline-date {
+    font-size: $font-size-sm;
+    color: #666;
+    margin-bottom: $spacing-xs;
+  }
+  
+  .timeline-title {
+    @include heading($font-size-lg);
+    margin-bottom: $spacing-xs;
+  }
+  
+  .timeline-company {
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: $spacing-sm;
+  }
+  
+  .timeline-description {
+    @include body-text($font-size-sm);
+    color: #666;
+  }
+}
+
+// Contact form
+.contact-form {
+  .form-group {
+    margin-bottom: $spacing-lg;
+    
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: $spacing-xs;
+      color: #333;
+    }
+    
+    input,
+    textarea {
+      width: 100%;
+      padding: $spacing-md;
+      font-family: $font-body;
+      font-size: $font-size-base;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      background: $color-white;
+      color: #333;
+      transition: border-color $transition-fast;
+      
+      &:focus {
+        outline: none;
+        border-color: var(--color-accent);
+      }
+    }
+    
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+  }
+  
+  .submit-btn {
+    @include button-base;
+    background: linear-gradient(135deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 80%, black));
+    color: var(--color-primary);
+    width: 100%;
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+    font-weight: 600;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px color-mix(in srgb, var(--color-accent) 40%, transparent);
+    }
+  }
+}
+
+// Social links
+.social-links {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+  
+  .social-link {
+    @include flex-center;
+    width: 45px;
+    height: 45px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    font-size: $font-size-xl;
+    color: #333;
+    transition: all $transition-normal;
+    
+    &:hover {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      transform: translateY(-3px);
+    }
+  }
+}

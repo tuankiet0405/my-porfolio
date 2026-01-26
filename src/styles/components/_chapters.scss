@@ -1,0 +1,269 @@
+// ===========================================
+// CHAPTER-SPECIFIC STYLES
+// ===========================================
+
+// Cover chapter
+.cover-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  color: var(--color-text);
+  
+  .cover-year {
+    position: absolute;
+    bottom: $spacing-xl;
+    font-family: $font-display;
+    font-size: $font-size-sm;
+    opacity: 0.5;
+    letter-spacing: 3px;
+    color: var(--color-text-secondary);
+  }
+}
+
+// Inside cover (back of front cover)
+.inside-cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+  .inside-cover-content {
+    text-align: center;
+    padding: $spacing-2xl;
+  }
+  
+  .edition-text {
+    font-family: $font-display;
+    font-size: $font-size-sm;
+    color: #666;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: $spacing-xl;
+  }
+  
+  .inside-decoration {
+    font-size: 32px;
+    color: var(--color-accent);
+    margin: $spacing-xl 0;
+  }
+  
+  .copyright-text {
+    font-size: $font-size-sm;
+    color: #888;
+    line-height: 1.8;
+    margin-bottom: $spacing-xl;
+  }
+  
+  .inside-quote {
+    max-width: 280px;
+    margin: 0 auto;
+    padding: $spacing-lg;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    
+    p {
+      font-family: $font-display;
+      font-style: italic;
+      font-size: $font-size-base;
+      color: #555;
+      line-height: 1.6;
+    }
+  }
+}
+
+// About Me chapter
+.profile-intro {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-xl;
+  
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 60%, var(--color-primary)));
+  border-radius: 50%;
+  font-size: 48px;
+  box-shadow: 0 5px 20px color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+.profile-text {
+  h3 {
+    font-size: $font-size-base;
+    color: #666;
+    margin-bottom: $spacing-xs;
+  }
+}
+
+.name-highlight {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: $font-size-3xl;
+  margin-bottom: $spacing-xs;
+}
+
+.tagline {
+  font-size: $font-size-lg;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.facts-list {
+  list-style: none;
+  padding: 0;
+  
+  li {
+    padding: $spacing-sm 0;
+    font-size: $font-size-base;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: #444;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// Skills chapter
+.soft-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+.soft-skill {
+  padding: $spacing-sm $spacing-md;
+  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  color: var(--color-primary);
+  border-radius: 20px;
+  font-size: $font-size-sm;
+  font-weight: 500;
+}
+
+// Projects chapter
+.view-more-text {
+  font-style: italic;
+  color: #666;
+  margin-bottom: $spacing-md;
+}
+
+.github-link {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  background: var(--color-primary);
+  color: $color-white;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background: var(--color-accent);
+    color: var(--color-primary);
+    transform: translateX(5px);
+  }
+}
+
+// Experience chapter
+.achievements-list,
+.certifications-list {
+  list-style: none;
+  padding: 0;
+  
+  li {
+    position: relative;
+    padding: $spacing-sm 0 $spacing-sm $spacing-xl;
+    color: #444;
+    
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+  }
+}
+
+.certifications-list li::before {
+  content: '📜';
+}
+
+// Contact chapter
+.thank-you-message {
+  padding: $spacing-xl;
+  text-align: center;
+}
+
+.closing-text {
+  font-size: $font-size-lg;
+  font-style: italic;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: $spacing-xl;
+}
+
+.signature {
+  margin: $spacing-xl 0;
+  
+  .signature-text {
+    font-family: $font-display;
+    font-size: $font-size-2xl;
+    font-style: italic;
+    color: var(--color-primary);
+    margin-bottom: $spacing-xs;
+  }
+  
+  .signature-title {
+    font-size: $font-size-sm;
+    color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
+
+.book-end-decoration {
+  font-size: $font-size-xl;
+  color: var(--color-accent);
+  letter-spacing: 10px;
+  margin-top: $spacing-xl;
+}
+
+.quick-links {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  align-items: center;
+}
+
+.quick-link {
+  padding: $spacing-sm $spacing-lg;
+  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  color: var(--color-primary);
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background: var(--color-accent);
+    color: var(--color-primary);
+  }
+}

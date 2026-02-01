@@ -11,11 +11,15 @@ const Cover = ({ isBackSide }) => {
           <p className="edition-text">First Edition</p>
           <div className="inside-decoration">❧</div>
           <p className="copyright-text">
-            © 2024 Your Name<br />
+            © 2026 Tuấn Kiệt
+            <br />
             All rights reserved.
           </p>
           <div className="inside-quote">
-            <p>"Code is poetry written for machines to execute and humans to understand."</p>
+            <p>
+              "Code is poetry written for machines to execute and humans to
+              understand."
+            </p>
           </div>
         </div>
       </div>
@@ -24,25 +28,20 @@ const Cover = ({ isBackSide }) => {
 
   return (
     <div className="cover-content">
-      <div className="cover-decoration" />
-      
-      <h1 className="cover-title animate-fade-in">
-        Portfolio
-      </h1>
-      
+      <img src="porfolio.jpg" alt="Cover" className="cover-image" />
+      {/* <div className="cover-decoration" />
+
+      <h1 className="cover-title animate-fade-in">Portfolio</h1>
+
       <p className="cover-subtitle animate-fade-in delay-2">
         Frontend Developer
       </p>
-      
+
       <div className="cover-decoration animate-fade-in delay-3" />
-      
-      <p className="cover-author animate-fade-in delay-4">
-        By Your Name
-      </p>
-      
-      <div className="cover-year animate-fade-in delay-5">
-        2024
-      </div>
+
+      <p className="cover-author animate-fade-in delay-4">By Tuấn Kiệt</p>
+
+      <div className="cover-year animate-fade-in delay-5">2026</div> */}
     </div>
   );
 };

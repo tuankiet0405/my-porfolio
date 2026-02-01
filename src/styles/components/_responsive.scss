@@ -21,15 +21,15 @@
 
   .bookmarks {
     right: -35px;
-    
+
     .bookmark-tab {
       width: 35px;
       height: 50px;
-      
+
       .bookmark-label {
         font-size: 10px;
       }
-      
+
       .bookmark-tooltip {
         display: none;
       }
@@ -40,11 +40,11 @@
     width: 40px;
     height: 40px;
     font-size: $font-size-lg;
-    
+
     &.prev {
       left: -50px;
     }
-    
+
     &.next {
       right: -50px;
     }
@@ -56,7 +56,7 @@
 
   .page-header {
     margin-bottom: $spacing-lg;
-    
+
     .chapter-title {
       font-size: $font-size-2xl;
     }
@@ -66,7 +66,7 @@
     .cover-title {
       font-size: $font-size-4xl;
     }
-    
+
     .cover-subtitle {
       font-size: $font-size-lg;
     }
@@ -94,9 +94,12 @@
   }
 
   .book {
-    width: 95vw;
+    min-width: 400px;
     height: auto;
     min-height: 80vh;
+    &::before {
+      display: none;
+    }
   }
 
   // Disable 3D flip on mobile, use slide instead
@@ -106,6 +109,7 @@
 
   .pages-container {
     transform-style: flat;
+    left: 0;
   }
 
   .page {
@@ -115,21 +119,12 @@
     transform: none !important;
     opacity: 0;
     visibility: hidden;
-    transition: opacity $transition-normal, visibility $transition-normal;
-    
+    transition: none;
+
     &.active {
       opacity: 1;
       visibility: visible;
       position: relative;
-    }
-    
-    // Hide back face on mobile
-    .page-back {
-      display: none;
-    }
-    
-    .page-front {
-      border-radius: 8px;
     }
   }
 
@@ -151,7 +146,7 @@
     gap: 2px;
     justify-content: center;
     z-index: 1000;
-    
+
     .bookmark-tab {
       width: auto;
       height: 40px;
@@ -159,20 +154,20 @@
       border-radius: 4px;
       flex: 1;
       max-width: 60px;
-      
+
       .bookmark-label {
         transform: none;
         position: static;
         font-size: 10px;
       }
-      
+
       &:hover {
         transform: none;
       }
-      
+
       &.active {
         transform: none;
-        
+
         &::after {
           display: none;
         }
@@ -183,11 +178,11 @@
   .nav-arrow {
     width: 35px;
     height: 35px;
-    
+
     &.prev {
       left: 5px;
     }
-    
+
     &.next {
       right: 5px;
     }
@@ -206,12 +201,12 @@
   .page-header {
     margin-bottom: $spacing-md;
     padding-bottom: $spacing-sm;
-    
+
     .chapter-number {
       font-size: $font-size-xs;
       letter-spacing: 2px;
     }
-    
+
     .chapter-title {
       font-size: $font-size-xl;
     }
@@ -219,15 +214,15 @@
 
   .cover-page .page-front {
     padding: $spacing-lg;
-    
+
     .cover-title {
       font-size: $font-size-3xl;
     }
-    
+
     .cover-subtitle {
       font-size: $font-size-base;
     }
-    
+
     .cover-author {
       font-size: $font-size-base;
     }
@@ -247,15 +242,15 @@
 
   .project-card {
     padding: $spacing-md;
-    
+
     .project-title {
       font-size: $font-size-base;
     }
-    
+
     .project-description {
       font-size: $font-size-sm;
     }
-    
+
     .project-tags {
       .tag {
         font-size: 10px;
@@ -266,22 +261,22 @@
 
   .timeline {
     padding-left: $spacing-lg;
-    
+
     &::before {
       left: 4px;
     }
-    
+
     .timeline-item {
       &::before {
         left: calc(-#{$spacing-lg} + 1px);
         width: 8px;
         height: 8px;
       }
-      
+
       .timeline-date {
         font-size: $font-size-xs;
       }
-      
+
       .timeline-title {
         font-size: $font-size-base;
       }
@@ -291,14 +286,14 @@
   .contact-form {
     .form-group {
       margin-bottom: $spacing-md;
-      
+
       input,
       textarea {
         padding: $spacing-sm;
         font-size: $font-size-base;
       }
     }
-    
+
     .submit-btn {
       padding: $spacing-sm $spacing-lg;
       font-size: $font-size-base;
@@ -308,7 +303,7 @@
   .social-links {
     justify-content: center;
     margin-top: $spacing-lg;
-    
+
     .social-link {
       width: 40px;
       height: 40px;

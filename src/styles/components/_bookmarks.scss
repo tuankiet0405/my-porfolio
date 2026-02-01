@@ -11,8 +11,10 @@
   flex-direction: column;
   gap: $spacing-xs;
   z-index: $z-bookmarks;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
   // Hidden state (when on cover view)
   &.bookmarks--hidden {
     opacity: 0;
@@ -26,13 +28,15 @@
   width: $bookmark-width;
   height: $bookmark-height;
   cursor: pointer;
-  transition: transform $transition-normal, box-shadow $transition-normal;
+  transition:
+    transform $transition-normal,
+    box-shadow $transition-normal;
   border-radius: 0 4px 4px 0;
   box-shadow: $shadow-bookmark;
-  
+
   // Bookmark ribbon shape
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -40,7 +44,7 @@
     height: 100%;
     border-radius: 0 4px 4px 0;
   }
-  
+
   // Chapter indicator text
   .bookmark-label {
     position: absolute;
@@ -56,25 +60,25 @@
     letter-spacing: 1px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
-  
+
   // Hover state
   &:hover {
     transform: translateX(-10px);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-    
+
     .bookmark-tooltip {
       opacity: 1;
       visibility: visible;
       transform: translateX(-10px);
     }
   }
-  
+
   // Active state
   &.active {
     transform: translateX(-15px);
-    
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       right: 5px;
       top: 50%;
@@ -86,7 +90,7 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
   }
-  
+
   // Tooltip
   .bookmark-tooltip {
     position: absolute;
@@ -104,9 +108,9 @@
     visibility: hidden;
     transition: all $transition-normal;
     pointer-events: none;
-    
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       right: -6px;
       top: 50%;
@@ -115,30 +119,54 @@
       border-left-color: rgba(0, 0, 0, 0.8);
     }
   }
-  
+
   // Individual bookmark colors using CSS custom properties
   &.bookmark-cover {
-    background: linear-gradient(135deg, var(--bookmark-cover), var(--color-secondary));
+    background: linear-gradient(
+      135deg,
+      var(--bookmark-cover),
+      var(--color-secondary)
+    );
   }
-  
+
   &.bookmark-about {
-    background: linear-gradient(135deg, var(--bookmark-about), color-mix(in srgb, var(--bookmark-about) 80%, black));
+    background: linear-gradient(
+      135deg,
+      var(--bookmark-about),
+      color-mix(in srgb, var(--bookmark-about) 80%, black)
+    );
   }
-  
+
   &.bookmark-skills {
-    background: linear-gradient(135deg, var(--bookmark-skills), color-mix(in srgb, var(--bookmark-skills) 80%, black));
+    background: linear-gradient(
+      135deg,
+      var(--bookmark-skills),
+      color-mix(in srgb, var(--bookmark-skills) 80%, black)
+    );
   }
-  
+
   &.bookmark-projects {
-    background: linear-gradient(135deg, var(--bookmark-projects), color-mix(in srgb, var(--bookmark-projects) 80%, black));
+    background: linear-gradient(
+      135deg,
+      var(--bookmark-projects),
+      color-mix(in srgb, var(--bookmark-projects) 80%, black)
+    );
   }
-  
+
   &.bookmark-experience {
-    background: linear-gradient(135deg, var(--bookmark-experience), color-mix(in srgb, var(--bookmark-experience) 80%, black));
+    background: linear-gradient(
+      135deg,
+      var(--bookmark-experience),
+      color-mix(in srgb, var(--bookmark-experience) 80%, black)
+    );
   }
-  
+
   &.bookmark-contact {
-    background: linear-gradient(135deg, var(--bookmark-contact), color-mix(in srgb, var(--bookmark-contact) 80%, black));
+    background: linear-gradient(
+      135deg,
+      var(--bookmark-contact),
+      color-mix(in srgb, var(--bookmark-contact) 80%, black)
+    );
   }
 }
 

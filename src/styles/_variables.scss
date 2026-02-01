@@ -31,8 +31,10 @@ $color-white: #ffffff;
 $color-black: #000000;
 
 // Book Dimensions
-$book-width: 800px;
-$book-height: 600px;
+$book-width: 70vw;
+$min-book-width: 800px;
+$book-height: 80vh;
+$min-book-height: 600px;
 $page-width: calc($book-width / 2);
 $bookmark-width: 40px;
 $bookmark-height: 60px;

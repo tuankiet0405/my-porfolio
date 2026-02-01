@@ -8,7 +8,12 @@
   align-items: center;
   min-height: 100vh;
   padding: $spacing-xl;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, color-mix(in srgb, var(--color-primary) 70%, black) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    color-mix(in srgb, var(--color-primary) 70%, black) 100%
+  );
   perspective: 2000px;
   overflow: hidden;
   transition: background 0.5s ease;
@@ -23,27 +28,28 @@
   position: relative;
   width: $book-width;
   height: $book-height;
+  min-height: $min-book-height;
   transform-style: preserve-3d;
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   // Closed book (cover view) - single page centered
   &.book--closed {
     width: $page-width;
-    
+
     // Hide spine on closed book
     &::before {
       opacity: 0;
     }
   }
-  
+
   // Open book
   &.book--open {
     width: $book-width;
   }
-  
+
   // Book spine effect (only visible when open)
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     top: 0;
@@ -72,7 +78,7 @@
   box-shadow: $shadow-book;
   border-radius: 0 8px 8px 0;
   transition: border-radius 0.3s ease;
-  
+
   // Full border-radius when book is closed
   .book--closed & {
     border-radius: 8px;
@@ -84,10 +90,14 @@
   position: absolute;
   width: $page-width;
   height: 100%;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
   border-radius: 0 8px 8px 0;
   box-shadow: inset -5px 0 20px rgba(0, 0, 0, 0.3);
-  
+
   &.back-cover {
     left: 0;
     border-radius: 8px 0 0 8px;
@@ -103,7 +113,7 @@
   left: 50%;
   transform-style: preserve-3d;
   transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   // Center pages when book is closed
   .book--closed & {
     left: 0;
@@ -128,18 +138,18 @@
   cursor: pointer;
   transition: all $transition-normal;
   z-index: $z-bookmarks + 10;
-  
+
   &:hover {
     background: var(--color-accent);
     border-color: var(--color-accent);
     color: var(--color-primary);
     transform: translateY(-50%) scale(1.1);
   }
-  
+
   &:disabled {
     opacity: 0.3;
     cursor: not-allowed;
-    
+
     &:hover {
       transform: translateY(-50%);
       background: rgba(255, 255, 255, 0.1);
@@ -147,11 +157,11 @@
       color: $color-white;
     }
   }
-  
+
   &.prev {
     left: -80px;
   }
-  
+
   &.next {
     right: -80px;
   }
@@ -164,13 +174,12 @@
     pointer-events: none;
     transform: translateY(-50%) translateX(-20px);
   }
-  
+
   .nav-arrow.next {
     right: -70px;
   }
 }
 
-// Light mode nav arrows
 [data-theme="light"] .nav-arrow {
   background: rgba(0, 0, 0, 0.05);
   border-color: rgba(0, 0, 0, 0.2);

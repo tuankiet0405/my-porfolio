@@ -43,7 +43,7 @@ const Contact = ({ isBackSide }) => {
             </p>
             
             <div className="signature">
-              <p className="signature-text">— Your Name</p>
+              <p className="signature-text">— Tuấn Kiệt</p>
               <p className="signature-title">Frontend Developer</p>
             </div>
             
@@ -90,7 +90,7 @@ const Contact = ({ isBackSide }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Your name"
+              placeholder="Tuấn Kiệt"
               required
             />
           </div>

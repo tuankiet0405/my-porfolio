@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 // ===========================================
 // PAGE COMPONENT STYLES
 // ===========================================
@@ -23,8 +25,9 @@
   height: $book-height;
   transform-style: preserve-3d;
   transform-origin: left center;
-  transition: transform $transition-page-flip;
+  transition: none;
   cursor: pointer;
+  will-change: transform;
 
   // Front side of page
   .page-front,

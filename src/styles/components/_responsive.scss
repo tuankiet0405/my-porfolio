@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 // ===========================================
 // RESPONSIVE STYLES - Portfolio Book
 // ===========================================
@@ -89,34 +91,57 @@
 // Mobile styles
 @media (max-width: $breakpoint-mobile) {
   .book-container {
-    padding: $spacing-sm;
+    align-items: flex-start;
+    min-height: 100dvh;
+    padding: 64px $spacing-sm 128px;
     perspective: none;
+    overflow-y: auto;
   }
 
   .book {
-    min-width: 400px;
-    height: auto;
-    min-height: 80vh;
+    width: 100%;
+    min-width: 0;
+    max-width: 440px;
+    height: clamp(540px, calc(100dvh - 170px), 720px);
+    min-height: 0;
+    transition: none;
+
     &::before {
       display: none;
     }
   }
 
-  // Disable 3D flip on mobile, use slide instead
+  .book.book--closed,
+  .book.book--open {
+    width: 100%;
+  }
+
   .book-wrapper {
+    height: 100%;
     transform-style: flat;
+    border-radius: 16px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  }
+
+  .book-cover.back-cover {
+    display: none;
   }
 
   .pages-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
     transform-style: flat;
     left: 0;
+    transition: none;
   }
 
   .page {
     width: 100%;
+    height: 100%;
     left: 0;
     transform-origin: center center;
-    transform: none !important;
+    transform: none;
     opacity: 0;
     visibility: hidden;
     transition: none;
@@ -124,7 +149,44 @@
     &.active {
       opacity: 1;
       visibility: visible;
-      position: relative;
+      position: absolute;
+      inset: 0;
+    }
+
+    .page-front,
+    .page-back {
+      height: 100%;
+      transform: none;
+      border-radius: 16px;
+      transition:
+        opacity 0.14s ease,
+        visibility 0.14s ease;
+    }
+
+    &.mobile-show-front {
+      .page-front {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .page-back {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+
+    &.mobile-show-back {
+      .page-front {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .page-back {
+        opacity: 1;
+        visibility: visible;
+      }
     }
   }
 
@@ -176,26 +238,32 @@
   }
 
   .nav-arrow {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(10px);
 
     &.prev {
-      left: 5px;
+      left: 10px;
     }
 
     &.next {
-      right: 5px;
+      right: 10px;
     }
   }
 
   .page-counter {
-    bottom: 60px;
+    bottom: 108px;
     font-size: $font-size-xs;
   }
 
+  .mobile-side-toggle {
+    display: flex;
+  }
+
   .page-content {
-    padding: $spacing-md;
-    padding-bottom: $spacing-2xl;
+    padding: $spacing-lg;
+    padding-bottom: 5rem;
   }
 
   .page-header {
@@ -213,7 +281,7 @@
   }
 
   .cover-page .page-front {
-    padding: $spacing-lg;
+    padding: 0;
 
     .cover-title {
       font-size: $font-size-3xl;
@@ -313,6 +381,44 @@
   // Hide flip hint on mobile
   .flip-hint {
     display: none;
+  }
+}
+
+.mobile-side-toggle {
+  position: fixed;
+  left: 50%;
+  bottom: 54px;
+  z-index: 1001;
+  display: none;
+  transform: translateX(-50%);
+  gap: $spacing-xs;
+  padding: $spacing-xs;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+
+  button {
+    border: 0;
+    border-radius: 999px;
+    padding: $spacing-xs $spacing-md;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.72);
+    font-family: $font-body;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    cursor: pointer;
+
+    &.active {
+      background: var(--color-accent);
+      color: var(--color-primary);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .mobile-side-toggle {
+    display: flex;
   }
 }
 

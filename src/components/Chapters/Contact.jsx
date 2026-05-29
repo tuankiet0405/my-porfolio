@@ -8,8 +8,10 @@ const Contact = ({ isBackSide }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    'bot-field': '',
   });
+  const [submitStatus, setSubmitStatus] = useState('idle');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,12 +21,31 @@ const Contact = ({ isBackSide }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    setSubmitStatus('submitting');
+
+    try {
+      const body = new URLSearchParams({
+        'form-name': 'contact',
+        ...formData,
+      }).toString();
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      });
+
+      if (!response.ok) {
+        throw new Error('Message submission failed');
+      }
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '', 'bot-field': '' });
+    } catch (error) {
+      setSubmitStatus('error');
+    }
   };
 
   if (isBackSide) {
@@ -56,9 +77,8 @@ const Contact = ({ isBackSide }) => {
         <div className="section">
           <h3 className="section-title text-center">Quick Links</h3>
           <div className="quick-links">
-            <a href="#" className="quick-link">Download Resume</a>
-            <a href="#" className="quick-link">View GitHub</a>
-            <a href="#" className="quick-link">LinkedIn Profile</a>
+            <a href="https://github.com/tuankiet0405" className="quick-link" target="_blank" rel="noopener noreferrer">View GitHub</a>
+            <a href="https://www.linkedin.com/in/deri0405/" className="quick-link" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
           </div>
         </div>
       </div>
@@ -81,7 +101,25 @@ const Contact = ({ isBackSide }) => {
       </div>
       
       <div className="section">
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form
+          className="contact-form"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p className="hidden-field">
+            <label>
+              Do not fill this out if you are human:
+              <input
+                name="bot-field"
+                value={formData['bot-field']}
+                onChange={handleChange}
+              />
+            </label>
+          </p>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -120,24 +158,26 @@ const Contact = ({ isBackSide }) => {
             />
           </div>
           
-          <button type="submit" className="submit-btn">
-            Send Message
+          <button type="submit" className="submit-btn" disabled={submitStatus === 'submitting'}>
+            {submitStatus === 'submitting' ? 'Sending...' : 'Send Message'}
           </button>
+
+          {submitStatus === 'success' && (
+            <p className="form-status success">Message sent successfully. I will get back to you soon.</p>
+          )}
+
+          {submitStatus === 'error' && (
+            <p className="form-status error">Something went wrong. Please try again in a moment.</p>
+          )}
         </form>
       </div>
-      
+       
       <div className="social-links">
-        <a href="#" className="social-link" aria-label="GitHub">
+        <a href="https://github.com/tuankiet0405" className="social-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
           <span>GH</span>
         </a>
-        <a href="#" className="social-link" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/deri0405/" className="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
           <span>LI</span>
-        </a>
-        <a href="#" className="social-link" aria-label="Twitter">
-          <span>TW</span>
-        </a>
-        <a href="#" className="social-link" aria-label="Email">
-          <span>@</span>
         </a>
       </div>
     </div>

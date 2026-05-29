@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 
 /**
  * Custom hook to manage page flip state and navigation
@@ -8,10 +8,10 @@ import { useState, useCallback, useRef } from 'react';
 const usePageFlip = (totalPages) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [flipDirection, setFlipDirection] = useState(null); // 'forward' | 'backward'
-  const animationTimeoutRef = useRef(null);
-  
-  const ANIMATION_DURATION = 800; // ms - matches CSS transition
+  const [flippingPage, setFlippingPage] = useState(null);
+  const [pendingPage, setPendingPage] = useState(null);
+  const [direction, setDirection] = useState(null); // 'forward' | 'backward'
+  const [mobileSide, setMobileSide] = useState('front');
 
   /**
    * Go to a specific page
@@ -21,22 +21,34 @@ const usePageFlip = (totalPages) => {
     if (pageIndex < 0 || pageIndex >= totalPages) return;
     if (pageIndex === currentPage) return;
 
+    const nextDirection = pageIndex > currentPage ? 'forward' : 'backward';
+
     setIsAnimating(true);
-    setFlipDirection(pageIndex > currentPage ? 'forward' : 'backward');
-
-    // Clear any existing timeout
-    if (animationTimeoutRef.current) {
-      clearTimeout(animationTimeoutRef.current);
-    }
-
-    setCurrentPage(pageIndex);
-
-    // Reset animation state after transition completes
-    animationTimeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      setFlipDirection(null);
-    }, ANIMATION_DURATION);
+    setDirection(nextDirection);
+    setFlippingPage(nextDirection === 'forward' ? currentPage : pageIndex);
+    setPendingPage(pageIndex);
+    setMobileSide('front');
   }, [currentPage, isAnimating, totalPages]);
+
+  const completeFlip = useCallback(() => {
+    setCurrentPage((previousPage) => pendingPage ?? previousPage);
+    setIsAnimating(false);
+    setFlippingPage(null);
+    setPendingPage(null);
+    setDirection(null);
+  }, [pendingPage]);
+
+  const showFrontSide = useCallback(() => {
+    setMobileSide('front');
+  }, []);
+
+  const showBackSide = useCallback(() => {
+    setMobileSide('back');
+  }, []);
+
+  const toggleMobileSide = useCallback(() => {
+    setMobileSide((side) => (side === 'front' ? 'back' : 'front'));
+  }, []);
 
   /**
    * Go to the next page
@@ -79,20 +91,27 @@ const usePageFlip = (totalPages) => {
    * Pages that are closer to being viewed should be on top
    */
   const getPageZIndex = useCallback((pageIndex) => {
-    if (isAnimating && pageIndex === currentPage) {
+    if (isAnimating && pageIndex === flippingPage) {
       return 100; // Animating page on top
     }
     // Stack pages so current page is visible
     return totalPages - Math.abs(currentPage - pageIndex);
-  }, [currentPage, isAnimating, totalPages]);
+  }, [currentPage, flippingPage, isAnimating, totalPages]);
 
   return {
     currentPage,
     isAnimating,
-    flipDirection,
+    flippingPage,
+    pendingPage,
+    direction,
+    mobileSide,
     goToPage,
     nextPage,
     prevPage,
+    completeFlip,
+    showFrontSide,
+    showBackSide,
+    toggleMobileSide,
     canGoNext,
     canGoPrev,
     isPageFlipped,

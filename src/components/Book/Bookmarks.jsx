@@ -6,25 +6,19 @@ import { memo } from 'react';
  */
 const Bookmarks = memo(({ chapters, currentPage, onNavigate, hidden }) => {
   return (
-    <div className={`bookmarks ${hidden ? 'bookmarks--hidden' : ''}`}>
+    <div className={`bookmarks ${hidden ? 'bookmarks--hidden' : ''}`} aria-hidden={hidden}>
       {chapters.map((chapter, index) => {
         const isActive = currentPage === index;
         
         return (
-          <div
+          <button
+            type="button"
             key={chapter.id}
             className={`bookmark-tab ${chapter.bookmarkClass} ${isActive ? 'active' : ''}`}
             onClick={() => onNavigate(index)}
-            role="button"
             tabIndex={hidden ? -1 : 0}
             aria-label={`Go to ${chapter.title}`}
             aria-current={isActive ? 'page' : undefined}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                onNavigate(index);
-              }
-            }}
           >
             <span className="bookmark-label">
               {getShortLabel(chapter.id)}
@@ -32,7 +26,7 @@ const Bookmarks = memo(({ chapters, currentPage, onNavigate, hidden }) => {
             <span className="bookmark-tooltip">
               {chapter.title}
             </span>
-          </div>
+          </button>
         );
       })}
     </div>

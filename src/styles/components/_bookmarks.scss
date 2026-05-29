@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 // ===========================================
 // BOOKMARKS COMPONENT STYLES
 // ===========================================
@@ -27,6 +29,7 @@
   position: relative;
   width: $bookmark-width;
   height: $bookmark-height;
+  border: 0;
   cursor: pointer;
   transition:
     transform $transition-normal,

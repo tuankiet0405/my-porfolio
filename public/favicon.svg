@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TK portfolio favicon">
+  <rect width="64" height="64" rx="14" fill="#0a192f"/>
+  <path d="M15 14h34v36H15z" fill="#f5f0e1"/>
+  <path d="M18 17h28v30H18z" fill="none" stroke="#64ffda" stroke-width="2"/>
+  <path d="M25 24h14M25 31h10M25 38h14" stroke="#0a192f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M49 14v36" stroke="#112240" stroke-width="3"/>
+</svg>

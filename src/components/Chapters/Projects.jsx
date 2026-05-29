@@ -124,7 +124,7 @@ const Projects = ({ isBackSide = false }) => {
           <p className="view-more-text">
             Interested in code quality and implementation details?
           </p>
-          <a href="#" className="github-link">
+          <a href="https://github.com/tuankiet0405" className="github-link" target="_blank" rel="noopener noreferrer">
             View GitHub profile →
           </a>
         </div>

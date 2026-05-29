@@ -73,7 +73,7 @@ const SkillItem = ({ skill, index }) => (
       <span className="skill-name">{skill.name}</span>
     </div>
     <div className="skill-bar">
-      <div className="skill-progress" style={{ width: `${skill.level}%` }} />
+      <div className="skill-progress" data-level={skill.level} />
     </div>
     <p className="skill-value">{skill.value}</p>
   </div>

@@ -2,15 +2,17 @@
 // MAIN SCSS - Portfolio Book
 // ===========================================
 
-// Base imports (variables and mixins are auto-imported via vite config)
-@import "animations";
+@use "core" as *;
+
+// Base styles
+@use "animations";
 
 // Component styles
-@import "components/book";
-@import "components/page";
-@import "components/bookmarks";
-@import "components/chapters";
-@import "components/responsive";
+@use "components/book";
+@use "components/page";
+@use "components/bookmarks";
+@use "components/chapters";
+@use "components/responsive";
 
 // ===========================================
 // RESET & BASE STYLES
@@ -200,6 +202,9 @@ a {
     overflow: hidden;
 
     .skill-progress {
+      transform: scaleX(0);
+      transform-origin: left center;
+      width: 100%;
       height: 100%;
       background: linear-gradient(
         90deg,
@@ -319,6 +324,10 @@ a {
 
 // Contact form
 .contact-form {
+  .hidden-field {
+    display: none;
+  }
+
   .form-group {
     margin-bottom: $spacing-lg;
 
@@ -370,6 +379,20 @@ a {
       transform: translateY(-2px);
       box-shadow: 0 5px 20px
         color-mix(in srgb, var(--color-accent) 40%, transparent);
+    }
+  }
+
+  .form-status {
+    margin-top: $spacing-md;
+    font-weight: 600;
+    text-align: center;
+
+    &.success {
+      color: #167a4f;
+    }
+
+    &.error {
+      color: #b42318;
     }
   }
 }
